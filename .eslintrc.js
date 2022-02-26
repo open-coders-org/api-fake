@@ -14,6 +14,7 @@ module.exports = {
   rules: {
     semi: ['error', 'always'],
     quotes: ['error', 'single'],
-    'no-unused-vars': ['error', { vars: 'all', args: 'after-used', ignoreRestSiblings: false }]
+    'no-unused-vars': ['error', { vars: 'all', args: 'after-used', ignoreRestSiblings: false }],
+    'no-console': 'off'
   }
 };

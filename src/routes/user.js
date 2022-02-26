@@ -1,9 +1,8 @@
-module.exports = (router) => {
-  router.get('/user', (_, res) => {
+module.exports = async (router) => {
+  router.get('/users', (_, res) => {
     return res.send({
       message: 'working',
       statusCode: 200
     });
   });
-  return router;
 };

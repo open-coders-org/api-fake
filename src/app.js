@@ -6,6 +6,7 @@ const router = express.Router();
 const errors = require('./error');
 const error = require('./middleware/error');
 const { NOT_FOUND } = require('./constants/errors');
+const db = require('./models');
 routes.init(router);
 app.use('/api/v1', router);
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -18,5 +19,5 @@ app.use((_, res, next) => {
   }
 });
 app.use(error);
-
+db();
 module.exports = app;
