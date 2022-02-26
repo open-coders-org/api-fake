@@ -3,12 +3,20 @@ const app = express();
 const routes = require('./routes');
 const bodyParser = require('body-parser');
 const router = express.Router();
+const errors = require('./error');
+const error = require('./middleware/error');
+const { NOT_FOUND } = require('./constants/errors');
 routes.init(router);
 app.use('/api/v1', router);
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use((_, res) => {
-  return res.send({ message: 'notfound' });
+app.use((_, res, next) => {
+  try {
+    throw errors.notfound(NOT_FOUND);
+  } catch (err) {
+    return next(err);
+  }
 });
+app.use(error);
 
 module.exports = app;
