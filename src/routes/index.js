@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 function getRoutes (app) {
   fs.readdirSync(path.join(__dirname)).forEach(file => {
-    if (!file.includes(__filename.split('/').pop())) {
+    if (!file.includes('index')) {
       require(path.join(__dirname, file))(app);
     }
   });

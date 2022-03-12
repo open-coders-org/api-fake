@@ -1,6 +1,5 @@
 const response = require('../../response');
-const mongoose = require('mongoose');
-const { getStatusDb } = require('../../models')();
+const { statusDb } = require('../../models')();
 exports.health = (_, res, next) => {
   try {
     const healthData = {
@@ -8,7 +7,7 @@ exports.health = (_, res, next) => {
       message: 'ok',
       date: new Date(),
       statusCode: 200,
-      dbStatus: getStatusDb(mongoose.connection.readyState)
+      dbStatus: statusDb()
     };
     return response(res)(healthData);
   } catch (err) {

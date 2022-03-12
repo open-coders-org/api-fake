@@ -8,18 +8,18 @@ const connectionStatus = {
   3: 'disconnecting'
 };
 const getStatusDb = (status) => (connectionStatus[status]);
+const statusDb = () => (getStatusDb(mongoose.connection.readyState));
 let models = null;
 module.exports = () => {
   mongoose.connect('mongodb://127.0.0.1:27017/api_fake');
-  console.log(getStatusDb(mongoose.connection.readyState));
-  if (models) return { models, getStatusDb };
+  if (models) return { models, statusDb };
   models = {};
   fs.readdirSync(path.join(__dirname)).forEach(file => {
-    if (!file.includes(__filename.split('/').pop())) {
+    if (!file.includes(__filename.split('index'))) {
       const model = require(path.join(__dirname, file));
       const modelName = file.split('.').shift();
       models[modelName] = model(mongoose);
     }
   });
-  return { models, getStatusDb };
+  return { models, statusDb };
 };
