@@ -7,7 +7,11 @@ const errors = require('./error');
 const error = require('./middleware/error');
 const { NOT_FOUND } = require('./constants/errors');
 const db = require('./models');
+
+const { loggerMiddleware } = require('./logger');
 routes.init(router);
+
+app.use(loggerMiddleware());
 app.use('/api/v1', router);
 app.use(bodyParser.urlencoded({ extended: false }));
 
