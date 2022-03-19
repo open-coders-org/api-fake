@@ -14,7 +14,6 @@ routes.init(router);
 app.use(loggerMiddleware());
 app.use('/api/v1', router);
 app.use(bodyParser.urlencoded({ extended: false }));
-console.log('test')
 app.use((_, res, next) => {
   try {
     throw errors.notfound(NOT_FOUND);
